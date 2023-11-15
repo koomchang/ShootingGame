@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 	public float speed = 5;
+	private GameObject player;
 	Vector3 dir;
+	public GameObject explosionFactory;
 
 	private void Start() {
 		int randValue = UnityEngine.Random.Range(0, 10);
@@ -24,6 +26,9 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision other) {
+		GameObject explosion = Instantiate(explosionFactory);
+		explosion.transform.position = transform.position;
+		
 		Destroy(other.gameObject);
 		Destroy(gameObject);
 	}
